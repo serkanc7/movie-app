@@ -1,0 +1,66 @@
+@import './globals/variables';
+@import './mixin/font-size';
+@import './mixin/media-query';
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+
+	font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.container {
+  margin-right: 150px;
+  margin-left: 150px;
+
+  @include mq(xl,max){
+    margin-right: 100px;
+    margin-left: 100px;
+  }
+
+  @include mq(lg,max){
+    margin-right: 50px;
+    margin-left: 50px;
+  }
+}
+
+.page-header {
+  margin: 0 0 20px;
+  padding: 0;
+
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.movies {
+  margin-top: 30px;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+
