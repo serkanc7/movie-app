@@ -45,7 +45,10 @@ export default {
 
     const searchMovie = () => {
       if (search.value) {
-        router.push({ path: "search", query: { q: search.value } });
+        router.replace({
+          path: "/search",
+          query: { q: search.value },
+        });
       }
     };
 
