@@ -7,9 +7,7 @@
       <div class="moviedetail__details">
         <h1 class="moviedetail__title">
           {{ movie.title }}
-          <span class="moviedetail__realese-year"
-            >({{ movie.releaseyear }})</span
-          >
+          <span class="moviedetail__realese-year">{{ movie.releaseyear }}</span>
         </h1>
         <div class="moviedetail__facts">
           <span class="moviedetail__release">{{ movie.releasedate }}</span>
@@ -106,7 +104,7 @@ export default {
           movie.directors = data.credits.crew.filter((person) => {
             return person.job === "Director";
           });
-          movie.releaseyear = data.release_date.slice(0, 4);
+          movie.releaseyear = `(${data.release_date.slice(0, 4)})`;
           movie.releasedate = data.release_date.split("-").reverse().join("/");
           movie.casts = data.credits.cast.filter(
             (item) => item.profile_path != null

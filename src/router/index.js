@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
 import HomeComponent from '../views/home/Home.vue';
 import MovieDetailComponent from '@/views/MovieDetail.vue'
 import SearchComponent from '@/views/Search.vue';
 import AllPopularMoviesComponent from '@/views/AllPopularMovies.vue';
 import AllTopRatedMoviesComponent from '@/views/AllTopRatedMovies.vue';
+
 const routes = [
   {
     path: '/',
@@ -17,9 +17,11 @@ const routes = [
     component: MovieDetailComponent
   },
   {
-    path: '/search/:query',
-    name: 'Search',
-    component: SearchComponent
+    path: '/search',
+    name: 'search',
+    component: SearchComponent,
+    props: route => ({ query: route.query.q })
+   
   },
   {
     path: '/popular',
@@ -39,6 +41,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+  
 });
 
 export default router;

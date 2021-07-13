@@ -1,5 +1,5 @@
 <template>
-  <form @submit="searchMovie()" class="search-box">
+  <form @submit.prevent="searchMovie()" class="search-box">
     <input
       type="search"
       placeholder="What are you looking for?"
@@ -45,7 +45,7 @@ export default {
 
     const searchMovie = () => {
       if (search.value) {
-        router.push("/search/" + search.value);
+        router.push({ path: "search", query: { q: search.value } });
       }
     };
 

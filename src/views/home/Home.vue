@@ -52,7 +52,7 @@
 <script>
 import HomeHeaderComponent from "./Header.vue";
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import env from "@/env.js";
 
 export default {
