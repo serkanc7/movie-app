@@ -12,7 +12,7 @@
 </template>
 <script>
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
-import { ref, onMounted } from "vue";
+import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import env from "@/env.js";
 export default {
@@ -21,9 +21,11 @@ export default {
     const route = useRoute();
     const foundmovies = ref([]);
 
+    /* searchQuery.value = route.query.q; */
+
     const getMovies = async () =>
       await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${env.apikey}&language=en-US&page=1&include_adult=false&query=${route.params.query}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${env.apikey}&language=en-US&page=1&include_adult=false&query=${route.query.q}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -33,7 +35,9 @@ export default {
           console.log(data.results);
         });
 
-    onMounted(() => getMovies());
+    watchEffect(() => {
+      getMovies();
+    });
 
     return {
       foundmovies,
