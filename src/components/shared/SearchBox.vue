@@ -1,5 +1,5 @@
 <template>
-  <form :action="searchMovie()" class="search-box">
+  <form @submit="searchMovie()" class="search-box">
     <input
       type="search"
       placeholder="What are you looking for?"
@@ -36,12 +36,19 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
     const search = ref("");
+    const router = useRouter();
+
     const searchMovie = () => {
-      return "/search/" + search.value;
+      if (search.value) {
+        router.push("/search/" + search.value);
+      }
     };
+
     return {
       search,
       searchMovie,
