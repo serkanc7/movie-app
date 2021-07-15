@@ -21,8 +21,6 @@ export default {
     const route = useRoute();
     const foundmovies = ref([]);
 
-    /* searchQuery.value = route.query.q; */
-
     const getMovies = async () =>
       await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=${env.apikey}&language=en-US&page=1&include_adult=false&query=${route.query.q}`
@@ -32,7 +30,6 @@ export default {
           foundmovies.value = data.results.filter(
             (item) => item.poster_path != null
           );
-          console.log(data.results);
         });
 
     watchEffect(() => {
@@ -45,11 +42,5 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.movies {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-}
+<style lang="scss" scoped>
 </style>

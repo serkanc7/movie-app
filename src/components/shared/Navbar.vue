@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   background-color: black;
   &__container {
@@ -81,6 +81,9 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    @include mq(sm-mid, max) {
+      margin-top: 20px;
+    }
   }
 }
 </style>

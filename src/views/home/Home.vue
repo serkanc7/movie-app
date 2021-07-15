@@ -1,6 +1,6 @@
 <template>
-  <HomeHeaderComponent />
-  <section class="popular">
+  <HeroComponent />
+  <section class="popular" id="popular">
     <div class="container">
       <header class="popular__header">
         <h2 class="popular__title">
@@ -50,13 +50,13 @@
 </template>
 
 <script>
-import HomeHeaderComponent from "./Header.vue";
+import HeroComponent from "../../components/home/Hero.vue";
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
 import { onMounted, ref } from "vue";
 import env from "@/env.js";
 
 export default {
-  components: { HomeHeaderComponent, MoviePosterComponent },
+  components: { HeroComponent, MoviePosterComponent },
   setup() {
     const index = ref("");
     const popularmovies = ref([]);
@@ -84,7 +84,7 @@ export default {
     onMounted(() => gettopratedMovies());
 
     return {
-      HomeHeaderComponent,
+      HeroComponent,
       MoviePosterComponent,
       popularmovies,
       topratedmovies,

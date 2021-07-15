@@ -6,8 +6,7 @@
   </router-link>
 </template>
 <script>
-import { onMounted, ref, computed } from "vue";
-import env from "@/env.js";
+import { computed } from "vue";
 export default {
   props: ["movie"],
   setup({ movie }) {
@@ -28,7 +27,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .movie-card {
   width: 100%;
   height: 100%;

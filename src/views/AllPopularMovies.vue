@@ -1,5 +1,6 @@
 <template>
   <section class="allpopular container">
+    <h1>Popular Movies</h1>
     <div class="movies">
       <MoviePosterComponent
         v-for="popularmovie in popularmovies"
@@ -38,7 +39,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .allpopular {
 }
 </style>

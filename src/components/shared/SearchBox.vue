@@ -37,7 +37,7 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-
+import env from "@/env.js";
 export default {
   setup() {
     const search = ref("");
@@ -59,7 +59,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .search-box {
   width: 100%;
   max-width: 400px;

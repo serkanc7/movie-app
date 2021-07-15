@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeComponent from '../views/home/Home.vue';
-import MovieDetailComponent from '@/views/MovieDetail.vue'
+import MovieDetailComponent from '@/views/moviedetail/MovieDetail.vue'
 import SearchComponent from '@/views/Search.vue';
 import AllPopularMoviesComponent from '@/views/AllPopularMovies.vue';
 import AllTopRatedMoviesComponent from '@/views/AllTopRatedMovies.vue';
