@@ -62,12 +62,10 @@
           />
         </div>
         <div class="moviedetail__tagline" v-if="movie.tagline">
-          {{ movie.tagline }}
+          <i>{{ movie.tagline }}</i>
         </div>
-        <div class="moviedetail__overview">
-          <h2 class="moviedetail__overview-title" v-if="movie.overview">
-            Overview
-          </h2>
+        <div class="moviedetail__overview" v-if="movie.overview">
+          <h2 class="moviedetail__overview-title">Overview</h2>
           <p class="moviedetail__overview-text">
             {{ movie.overview }}
           </p>
@@ -232,15 +230,6 @@ export default {
   align-items: stretch;
   justify-content: flex-start;
 
-  &__bg {
-    height: 600px;
-    background-repeat: no-repeat;
-    background-size: 100% 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   &__poster-img {
     @include mq(sm, max) {
       width: 200px;
@@ -345,6 +334,10 @@ export default {
     padding: 3px;
     background-color: $white;
     border-radius: 5px;
+  }
+
+  &__tagline {
+    margin-top: 15px;
   }
 
   &__cast-container {
