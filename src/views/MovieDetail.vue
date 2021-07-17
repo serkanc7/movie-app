@@ -22,14 +22,19 @@
           >
         </div>
         <div class="moviedetail__facts">
-          <span class="moviedetail__release">{{ movie.releasedate }}</span>
+          <span class="moviedetail__release" v-if="movie.releasedate">{{
+            movie.releasedate
+          }}</span>
           <span class="moviedetail__dot"></span>
-          <span class="moviedetail__runtime">{{ movie.runtime }} min</span>
+          <span class="moviedetail__runtime" v-if="movie.runtime"
+            >{{ movie.runtime }} min</span
+          >
         </div>
         <div class="moviedetail__actions">
-          <span class="moviedetail__score"
-            >{{ movie.rating }}% <img src="@/assets/svg/star.svg" alt=""
-          /></span>
+          <span class="moviedetail__rating" v-if="movie.rating">{{
+            movie.rating
+          }}</span>
+
           <button class="moviedetail__addfavorite" @click="toggleFavorite">
             <svg
               :class="{ favorite: movie.hasFavourite }"
@@ -48,7 +53,7 @@
             </svg>
           </button>
           <button class="moviedetail__play" @click="toggleTrailer">
-            <img src="@/assets/svg/play.svg" alt="" /> Play Trailer
+            <img src="@/assets/svg/play.svg" alt="Play" /> Play Trailer
           </button>
           <TrailerComponent
             v-if="buttonTriggered"
@@ -56,7 +61,7 @@
             :trailer="movie.trailer"
           />
         </div>
-        <div class="moviedetail__tagline">
+        <div class="moviedetail__tagline" v-if="movie.tagline">
           {{ movie.tagline }}
         </div>
         <div class="moviedetail__overview">
@@ -133,6 +138,7 @@ export default {
       trailer: "",
       similarmovies: "",
       hasFavourite: false,
+      isAdded: false,
     });
 
     const toggleFavorite = () => {
@@ -141,8 +147,7 @@ export default {
         if (localStorage.getItem("data") == null) {
           localStorage.setItem("data", "[]");
         }
-
-        var old_data = JSON.parse(localStorage.getItem("data"));
+        let old_data = JSON.parse(localStorage.getItem("data"));
         old_data.push({
           id: movie.id,
           title: movie.title,
@@ -184,11 +189,21 @@ export default {
             ? ""
             : `https://www.youtube.com/embed/${data.videos.results[0].key}`;
           movie.similarmovies = data.similar.results.slice(0, 6);
-          JSON.parse(localStorage.getItem("data")).forEach((element) => {
-            if (element.id == data.id) {
-              movie.hasFavourite = true;
-            }
-          });
+          movie.isAdded = false;
+
+          if (localStorage.getItem("data")) {
+            JSON.parse(localStorage.getItem("data")).forEach((element) => {
+              if (element.id == data.id) {
+                console.log(element.id);
+                console.log(data.id);
+                movie.hasFavourite = true;
+                movie.isAdded = true;
+              }
+            });
+          }
+          if (!movie.isAdded) {
+            movie.hasFavourite = false;
+          }
         });
 
     watchEffect(() => {
@@ -295,11 +310,23 @@ export default {
     max-width: 300px;
   }
 
-  &__score {
+  &__rating {
+    color: $white;
+    background-color: $black;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    font-weight: bold;
+
+    &:hover {
+      color: $black;
+      background-color: $white;
+      border: 2px solid $black;
+    }
   }
 
   &__addfavorite {
@@ -316,7 +343,7 @@ export default {
     border: 2px solid;
     color: $black;
     padding: 3px;
-    background-color: white;
+    background-color: $white;
     border-radius: 5px;
   }
 

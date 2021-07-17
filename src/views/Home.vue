@@ -138,7 +138,7 @@ export default {
 }
 
 .popular {
-  margin-top: 40px;
+  margin-top: 30px;
   &__header {
     display: flex;
     flex-direction: row;
@@ -178,9 +178,9 @@ export default {
 
 .toprated {
   background-color: $toprated-bgcolor;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin-top: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: 30px;
   &__header {
     display: flex;
     flex-direction: row;
