@@ -70,26 +70,21 @@ export default {
   }
 
   &__input {
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
+    padding: 5px;
+    font-size: 12px;
     border: 2px solid $gray;
     outline: none;
-    border-radius: 20px 0px 0px 20px;
     width: 100%;
     border-right: none;
   }
 
   &__button {
     float: right;
-    padding: 6px 10px;
-    margin-top: 8px;
-    margin-right: 16px;
+    padding: 5px 5px;
     background: $white;
-    font-size: 17px;
+    font-size: 12px;
     border: 2px solid $gray;
     cursor: pointer;
-    border-radius: 0 20px 20px 0px;
     border-left: none;
   }
 }
