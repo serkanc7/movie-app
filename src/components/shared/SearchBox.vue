@@ -70,21 +70,24 @@ export default {
   }
 
   &__input {
-    padding: 5px;
+    padding: 6px;
     font-size: 12px;
     border: 2px solid $gray;
     outline: none;
+    border-radius: 20px 0px 0px 20px;
     width: 100%;
     border-right: none;
+    -webkit-appearance: none;
   }
 
   &__button {
     float: right;
-    padding: 5px 5px;
+    padding: 6px 10px;
     background: $white;
     font-size: 12px;
     border: 2px solid $gray;
     cursor: pointer;
+    border-radius: 0 20px 20px 0px;
     border-left: none;
   }
 }
