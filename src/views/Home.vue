@@ -3,13 +3,15 @@
   <section class="popular" id="popular">
     <div class="container">
       <header class="popular__header">
-        <h2 class="popular__title">
-          <span class="popular__icon"
-            ><img src="@/assets/svg/popular.svg" alt=""
-          /></span>
+        <h2 class="category__title">
+          <img
+            src="@/assets/svg/popular.svg"
+            class="category__icon"
+            alt="Popular"
+          />
           Popular Movies
         </h2>
-        <router-link to="/popular" class="popular__link"
+        <router-link to="/popular" class="category__link"
           >View All &#8594;</router-link
         >
       </header>
@@ -27,13 +29,15 @@
   <section class="toprated">
     <div class="container">
       <header class="toprated__header">
-        <h2 class="toprated__title">
-          <span class="toprated__icon"
-            ><img src="@/assets/svg/toprated.svg" alt=""
-          /></span>
+        <h2 class="category__title">
+          <img
+            src="@/assets/svg/toprated.svg"
+            class="category__icon"
+            alt="Toprated Movies"
+          />
           Top Rated Movies
         </h2>
-        <router-link to="/toprated" class="toprated__link"
+        <router-link to="/toprated" class="category__link"
           >View All &#8594;</router-link
         >
       </header>
@@ -50,7 +54,7 @@
 </template>
 
 <script>
-import HeroComponent from "../../components/home/Hero.vue";
+import HeroComponent from "@/components/home/Hero.vue";
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
 import { onMounted, ref } from "vue";
 import env from "@/env.js";
@@ -102,6 +106,37 @@ export default {
   justify-content: flex-start;
 }
 
+.category {
+  &__title {
+    margin-bottom: 0;
+    font-size: 22px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    @include mq(sm-mid, max) {
+      font-size: 16px;
+    }
+    @include mq(sm-mid, max) {
+      font-size: 14px;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $gray;
+    font-weight: bold;
+    @include mq(sm-mid, max) {
+      font-size: 14px;
+    }
+
+    @include mq(sm, max) {
+      font-size: 12px;
+    }
+  }
+}
+
 .popular {
   margin-top: 40px;
   &__header {
@@ -110,16 +145,6 @@ export default {
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 30px;
-  }
-
-  &__title {
-    margin-bottom: 0;
-  }
-
-  &__link {
-    text-decoration: none;
-    color: $gray;
-    font-weight: bold;
   }
 
   &__movies {
@@ -134,6 +159,11 @@ export default {
     @for $i from 0 through 8 {
       .popular__movie-#{$i} {
         grid-area: popular__movie- + $i;
+      }
+
+      @include mq(md, max) {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 8px;
       }
     }
     @include mq(md, max) {
@@ -159,16 +189,6 @@ export default {
     margin-bottom: 30px;
   }
 
-  &__title {
-    margin-bottom: 0;
-  }
-
-  &__link {
-    text-decoration: none;
-    color: $gray;
-    font-weight: bold;
-  }
-
   &__movies {
     display: grid;
     grid-gap: 20px;
@@ -176,6 +196,7 @@ export default {
     grid-template-rows: auto;
     @include mq(md, max) {
       grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 8px;
     }
   }
 }

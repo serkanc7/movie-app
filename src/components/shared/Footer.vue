@@ -51,6 +51,10 @@ export default {};
     text-decoration: none;
     color: $gray;
     font-weight: bold;
+
+    @include mq(sm, max) {
+      font-size: 12px;
+    }
   }
 
   &__social {
@@ -71,6 +75,9 @@ export default {};
     justify-content: flex-start;
     column-gap: 30px;
     margin-bottom: 20px;
+    @include mq(sm, max) {
+      column-gap: 15px;
+    }
   }
 }
 </style>

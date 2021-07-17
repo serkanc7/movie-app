@@ -1,7 +1,9 @@
 <template>
   <div class="content">
-    <NavbarComponent />
-    <router-view />
+    <div>
+      <NavbarComponent />
+      <router-view />
+    </div>
     <FooterComponent />
   </div>
 </template>
@@ -19,5 +21,9 @@ export default {
 
 <style lang="scss">
 .content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

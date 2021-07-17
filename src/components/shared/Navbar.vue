@@ -3,10 +3,10 @@
     <div class="container header__container">
       <nav class="header__links">
         <router-link to="/" class="header__logo">flixus</router-link>
-        <router-link to="/browse+" class="header__link header__link--browse"
+        <!-- <router-link to="/browse+" class="header__link header__link--browse"
           >Browse+</router-link
-        >
-        <router-link to="/favourites" class="header__link header__link--fav"
+        > -->
+        <router-link to="/favorites" class="header__link header__link--fav"
           >Favourites</router-link
         >
       </nav>
@@ -51,7 +51,7 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    min-width: 250px;
+    min-width: 170px;
   }
 
   &__logo {

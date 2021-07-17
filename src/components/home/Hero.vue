@@ -25,9 +25,10 @@ export default {
   align-items: stretch;
   justify-content: flex-start;
 
-  /* @include mq(md, max) {
-    display: none;
-  } */
+  @include mq(md, max) {
+    height: 300px;
+    background-size: 100% 300px;
+  }
 }
 
 .hero {
@@ -40,6 +41,14 @@ export default {
     margin-top: 160px;
     color: $white;
     font-size: 40px;
+    text-align: center;
+    @include mq(md, max) {
+      margin-top: 50px;
+      font-size: 30px;
+    }
+    @include mq(sm, max) {
+      font-size: 25px;
+    }
   }
 
   &__text {
@@ -48,6 +57,13 @@ export default {
     font-size: 22px;
     margin-top: 0;
     margin-bottom: 45px;
+    text-align: center;
+    @include mq(md, max) {
+      font-size: 18px;
+    }
+    @include mq(sm, max) {
+      font-size: 15px;
+    }
   }
 
   &__link {
@@ -56,7 +72,7 @@ export default {
     border: 2px solid $black;
     background-color: $white;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 15px;
     font-weight: bold;
     font-family: "Roboto", sans-serif;
 
@@ -64,6 +80,10 @@ export default {
       border: 2px solid $white;
       background-color: black;
       color: $white;
+    }
+    @include mq(sm, max) {
+      padding: 5px 10px;
+      font-size: 10px;
     }
   }
 }

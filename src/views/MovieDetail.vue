@@ -2,24 +2,27 @@
   <section class="moviedetail container">
     <header class="moviedetail__header">
       <div class="moviedetail__poster">
-        <img :src="movie.posterpath" alt="" />
+        <img
+          class="moviedetail__poster-img"
+          :src="movie.posterpath"
+          :alt="movie.title"
+        />
       </div>
       <div class="moviedetail__details">
         <h1 class="moviedetail__title">
           {{ movie.title }}
           <span class="moviedetail__realese-year">{{ movie.releaseyear }}</span>
         </h1>
+        <div class="moviedetail__genres">
+          <span
+            class="moviedetail__genre"
+            v-for="genre in movie.genres.slice(0, 4)"
+            :key="genre.id"
+            >{{ genre.name }}</span
+          >
+        </div>
         <div class="moviedetail__facts">
           <span class="moviedetail__release">{{ movie.releasedate }}</span>
-          <span class="moviedetail__dot"></span>
-          <span class="moviedetail__genres">
-            <span
-              class="moviedetail__genre"
-              v-for="genre in movie.genres"
-              :key="genre.id"
-              >{{ genre.name }}</span
-            >
-          </span>
           <span class="moviedetail__dot"></span>
           <span class="moviedetail__runtime">{{ movie.runtime }} min</span>
         </div>
@@ -29,7 +32,7 @@
           /></span>
           <button class="moviedetail__addfavorite" @click="toggleFavorite">
             <svg
-              :class="{ favorite: hasFavourite }"
+              :class="{ favorite: movie.hasFavourite }"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -103,7 +106,7 @@
 </template>
 
 <script>
-import { reactive, ref, onMounted, watchEffect } from "vue";
+import { reactive, ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import CastCardComponent from "@/components/moviedetail/CastCard.vue";
 import TrailerComponent from "@/components/moviedetail/Trailer.vue";
@@ -113,18 +116,13 @@ export default {
   components: { CastCardComponent, TrailerComponent, MoviePosterComponent },
   setup() {
     const route = useRoute();
-
-    const hasFavourite = ref(false);
     const buttonTriggered = ref(false);
     const toggleTrailer = () => {
       buttonTriggered.value = !buttonTriggered.value;
     };
 
-    const toggleFavorite = () => {
-      hasFavourite.value = !hasFavourite.value;
-    };
-
     let movie = reactive({
+      id: "",
       title: "",
       backgroundpath: "",
       posterpath: "",
@@ -138,7 +136,32 @@ export default {
       runtime: "",
       trailer: "",
       similarmovies: "",
+      hasFavourite: false,
+      isadded: false,
     });
+
+    const toggleFavorite = () => {
+      movie.hasFavourite = !movie.hasFavourite;
+      if (movie.hasFavourite) {
+        if (localStorage.getItem("data") == null) {
+          localStorage.setItem("data", "[]");
+        }
+
+        var old_data = JSON.parse(localStorage.getItem("data"));
+        old_data.push({
+          id: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+        });
+        localStorage.setItem("data", JSON.stringify(old_data));
+        console.log(localStorage.getItem("data"));
+      } else {
+        let data = JSON.parse(localStorage.getItem("data"));
+        data = data.filter((favorite) => favorite.id != movie.id);
+        console.log(data);
+        localStorage.setItem("data", JSON.stringify(data));
+      }
+    };
 
     const getMovie = async () =>
       await fetch(
@@ -146,8 +169,10 @@ export default {
       )
         .then((response) => response.json())
         .then((data) => {
+          movie.id = data.id;
           movie.title = data.title;
           movie.backgroundpath = data.backdrop_path;
+          movie.poster_path = data.poster_path;
           movie.posterpath = `https://image.tmdb.org/t/p/w300/${data.poster_path}`;
           movie.tagline = data.tagline;
           movie.overview = data.overview;
@@ -160,17 +185,27 @@ export default {
           movie.casts = data.credits.cast.filter(
             (item) => item.profile_path != null
           );
-
           movie.genres = data.genres;
           movie.runtime = data.runtime;
-          movie.trailer = `https://www.youtube.com/embed/${data.videos.results[0].key}`;
+          movie.trailer = !data.videos.results.length
+            ? ""
+            : `https://www.youtube.com/embed/${data.videos.results[0].key}`;
           movie.similarmovies = data.similar.results.slice(0, 6);
-
-          console.log(data);
-          console.log(movie.rating);
+          JSON.parse(localStorage.getItem("data")).forEach((element) => {
+            if (element.id == data.id) {
+              console.log(element.id);
+              console.log(data.id);
+              movie.hasFavourite = true;
+            }
+            console.log(movie.hasFavourite);
+          });
         });
 
-    watchEffect(() => getMovie());
+    watchEffect(() => {
+      if (route.params.id) {
+        getMovie();
+      }
+    });
 
     return {
       movie,
@@ -180,7 +215,6 @@ export default {
       buttonTriggered,
       toggleTrailer,
       toggleFavorite,
-      hasFavourite,
     };
   },
 };
@@ -202,6 +236,12 @@ export default {
     justify-content: center;
   }
 
+  &__poster-img {
+    @include mq(sm, max) {
+      width: 200px;
+    }
+  }
+
   &__header {
     color: $black;
     display: flex;
@@ -215,7 +255,15 @@ export default {
   }
   &__details {
     padding-left: 40px;
+    @include mq(md, max) {
+      padding-left: 0;
+    }
   }
+
+  &__title {
+    margin-bottom: 5px;
+  }
+
   &__facts {
     display: flex;
     flex-direction: row;
@@ -228,6 +276,14 @@ export default {
     align-items: center;
     justify-content: flex-start;
     column-gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  &__genre {
+    background-color: $gray;
+    padding: 5px;
+    border-radius: 10px;
+    color: $white;
   }
 
   &__dot {
@@ -278,7 +334,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   &__similarmovies {
@@ -288,6 +344,7 @@ export default {
     grid-template-rows: auto;
     @include mq(md, max) {
       grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 8px;
     }
   }
 

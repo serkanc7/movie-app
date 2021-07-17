@@ -28,7 +28,7 @@ export default {
   align-items: stretch;
   justify-content: flex-start;
   width: 150px;
-  margin-bottom: 10px;
+  margin: 10px;
   box-shadow: rgba(50, 50, 93, 0.5) 0px 2px 5px 1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   text-align: center;

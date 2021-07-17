@@ -6,7 +6,6 @@
         v-for="popularmovie in popularmovies"
         :movie="popularmovie"
         :key="popularmovie.id"
-        class="allpopular__movie"
       />
     </div>
   </section>

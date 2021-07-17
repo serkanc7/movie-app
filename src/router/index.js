@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeComponent from '../views/home/Home.vue';
-import MovieDetailComponent from '@/views/moviedetail/MovieDetail.vue'
+import HomeComponent from '../views/Home.vue';
+import MovieDetailComponent from '@/views/MovieDetail.vue'
 import SearchComponent from '@/views/Search.vue';
 import AllPopularMoviesComponent from '@/views/AllPopularMovies.vue';
 import AllTopRatedMoviesComponent from '@/views/AllTopRatedMovies.vue';
-
+import FavoritesComponent from '@/views/Favorites.vue';
 const routes = [
   {
     path: '/',
@@ -33,7 +33,11 @@ const routes = [
     path: '/toprated',
     name: 'All Toprated Movies',
     component: AllTopRatedMoviesComponent,
-    props: true
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: FavoritesComponent,
   },
 
 ];
