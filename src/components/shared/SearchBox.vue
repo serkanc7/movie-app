@@ -70,27 +70,27 @@ export default {
   }
 
   &__input {
-    width: 100%;
-    border: 3px solid $gray;
-    border-right: none;
-    padding: 20px;
-    height: 20px;
-    border-radius: 30px 0 0 30px;
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: 2px solid $gray;
     outline: none;
-    color: #9dbfaf;
+    border-radius: 20px 0px 0px 20px;
+    width: 100%;
+    border-right: none;
   }
 
   &__button {
-    width: 40px;
-    height: 46px;
-    border: 3px solid $gray;
-    border-left: none;
-    background: white;
-    text-align: center;
-    color: black;
-    border-radius: 0 30px 30px 0;
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: $white;
+    font-size: 17px;
+    border: 2px solid $gray;
     cursor: pointer;
-    font-size: 20px;
+    border-radius: 0 20px 20px 0px;
+    border-left: none;
   }
 }
 </style>
