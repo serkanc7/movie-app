@@ -24,7 +24,6 @@ export default {
 
     onMounted(() => {
       getFavoriteMovies();
-      console.log(favoritemovies.value);
     });
 
     return {

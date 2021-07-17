@@ -16,7 +16,7 @@
         <div class="moviedetail__genres">
           <span
             class="moviedetail__genre"
-            v-for="genre in movie.genres.slice(0, 4)"
+            v-for="genre in movie.genres.slice(0, 3)"
             :key="genre.id"
             >{{ genre.name }}</span
           >
@@ -97,10 +97,6 @@
           class="similar__movie"
         />
       </div>
-
-      <!-- <p v-for="similarmovie in movie.similarmovies">
-        {{ similarmovie.title }}
-      </p> -->
     </section>
   </section>
 </template>
@@ -137,7 +133,6 @@ export default {
       trailer: "",
       similarmovies: "",
       hasFavourite: false,
-      isadded: false,
     });
 
     const toggleFavorite = () => {
@@ -154,11 +149,9 @@ export default {
           poster_path: movie.poster_path,
         });
         localStorage.setItem("data", JSON.stringify(old_data));
-        console.log(localStorage.getItem("data"));
       } else {
         let data = JSON.parse(localStorage.getItem("data"));
         data = data.filter((favorite) => favorite.id != movie.id);
-        console.log(data);
         localStorage.setItem("data", JSON.stringify(data));
       }
     };
@@ -193,11 +186,8 @@ export default {
           movie.similarmovies = data.similar.results.slice(0, 6);
           JSON.parse(localStorage.getItem("data")).forEach((element) => {
             if (element.id == data.id) {
-              console.log(element.id);
-              console.log(data.id);
               movie.hasFavourite = true;
             }
-            console.log(movie.hasFavourite);
           });
         });
 
