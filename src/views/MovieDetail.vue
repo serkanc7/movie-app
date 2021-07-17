@@ -280,7 +280,6 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    column-gap: 5px;
     margin-bottom: 10px;
   }
 
@@ -289,6 +288,7 @@ export default {
     padding: 5px;
     border-radius: 10px;
     color: $white;
+    margin-right: 5px;
   }
 
   &__dot {
