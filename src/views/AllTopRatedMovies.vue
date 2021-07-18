@@ -1,12 +1,11 @@
 <template>
-  <section class="alltoprated container">
+  <section class="container">
     <h1>Toprated Movies</h1>
     <div class="movies">
       <MoviePosterComponent
         v-for="topratedmovie in topratedmovies"
         :movie="topratedmovie"
         :key="topratedmovie.id"
-        class="alltoprated__movie"
       />
     </div>
   </section>
@@ -40,6 +39,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.alltoprated {
-}
 </style>
