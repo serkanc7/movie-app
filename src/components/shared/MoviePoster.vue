@@ -2,7 +2,6 @@
   <router-link :to="'/movie/' + movie.id" @click="scrollToTop">
     <div class="movie-card">
       <img class="movie-card__poster" :src="imgURL" :alt="title" />
-      <div class="movie__title">{{ movie.title }}</div>
     </div>
   </router-link>
 </template>
@@ -11,18 +10,15 @@ import { computed } from "vue";
 export default {
   props: ["movie"],
   setup({ movie }) {
-    const title = movie.title;
     const imgURL = computed(() => {
       return `https://image.tmdb.org/t/p/w300/${movie.poster_path}`;
     });
-
     const scrollToTop = () => {
       window.scrollTo(0, 0);
     };
 
     return {
       imgURL,
-      title,
       scrollToTop,
     };
   },
@@ -69,10 +65,6 @@ export default {
       transform: rotate(25deg);
       top: -40%;
       opacity: 0.15;
-    }
-
-    .movie__title {
-      transform: none;
     }
   }
 
