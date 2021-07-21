@@ -37,7 +37,6 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import env from "@/env.js";
 export default {
   setup() {
     const search = ref("");

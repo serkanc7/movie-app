@@ -57,18 +57,18 @@
 import HeroComponent from "@/components/home/Hero.vue";
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
 import { onMounted, ref } from "vue";
-import env from "@/env.js";
 
 export default {
   components: { HeroComponent, MoviePosterComponent },
   setup() {
+    const apikey = import.meta.env.VITE_KEY;
     const index = ref("");
     const popularmovies = ref([]);
     const topratedmovies = ref([]);
 
     const getPopularMovies = async () =>
       await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${env.apikey}&language=en-US&page=1&`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=en-US&page=1&`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -77,7 +77,7 @@ export default {
 
     const gettopratedMovies = async () =>
       await fetch(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${env.apikey}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=1`
       )
         .then((response) => response.json())
         .then((data) => {

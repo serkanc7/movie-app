@@ -14,16 +14,16 @@
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
 import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import env from "@/env.js";
 export default {
   components: { MoviePosterComponent },
   setup() {
+    const apikey = import.meta.env.VITE_KEY;
     const route = useRoute();
     const foundmovies = ref([]);
 
     const getMovies = async () =>
       await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${env.apikey}&language=en-US&page=1&include_adult=false&query=${route.query.q}&append_to_response=videos,credits,release_dates,similar,images`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=en-US&page=1&include_adult=false&query=${route.query.q}&append_to_response=videos,credits,release_dates,similar,images`
       )
         .then((response) => response.json())
         .then((data) => {

@@ -1,7 +1,7 @@
 <template>
   <router-link :to="'/movie/' + movie.id" @click="scrollToTop">
     <div class="movie-card">
-      <img class="movie-card__poster" :src="imgURL" :alt="title" />
+      <img class="movie-card__poster" :src="imgURL" :alt="movie.title" />
     </div>
   </router-link>
 </template>

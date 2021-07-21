@@ -110,10 +110,10 @@ import { useRoute } from "vue-router";
 import CastCardComponent from "@/components/moviedetail/CastCard.vue";
 import TrailerComponent from "@/components/moviedetail/Trailer.vue";
 import MoviePosterComponent from "@/components/shared/MoviePoster.vue";
-import env from "@/env.js";
 export default {
   components: { CastCardComponent, TrailerComponent, MoviePosterComponent },
   setup() {
+    const apikey = import.meta.env.VITE_KEY;
     const route = useRoute();
     const buttonTriggered = ref(false);
     const toggleTrailer = () => {
@@ -161,7 +161,7 @@ export default {
 
     const getMovie = async () =>
       await fetch(
-        `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${env.apikey}&language=en-US&append_to_response=videos,credits,release_dates,similar,images`
+        `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=${apikey}&language=en-US&append_to_response=videos,credits,release_dates,similar,images`
       )
         .then((response) => response.json())
         .then((data) => {
