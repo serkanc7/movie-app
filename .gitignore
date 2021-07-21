@@ -102,6 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
-local/
 production/
 .DS_Store
+*.local
