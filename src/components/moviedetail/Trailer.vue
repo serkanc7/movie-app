@@ -68,12 +68,18 @@ export default {
     padding: 0;
     background-color: transparent;
     border: transparent;
+    cursor: pointer;
   }
 
   &__video {
     width: 100%;
-    height: 400px;
-
+    height: 700px;
+    @include mq(xl, max) {
+      height: 500px;
+    }
+    @include mq(lg, max) {
+      height: 400px;
+    }
     @include mq(sm-mid, max) {
       height: 300px;
     }

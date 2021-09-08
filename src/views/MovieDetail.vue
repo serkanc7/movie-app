@@ -82,7 +82,7 @@
     </header>
     <section class="moviedetail__cast">
       <h2>Top Billed Cast</h2>
-      <div class="moviedetail__cast-container">
+      <div class="moviedetail__cast-container moviedetail__similarmovies">
         <CastCardComponent
           v-for="cast in movie.casts.slice(0, 6)"
           :key="cast.id"
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { reactive, ref, watchEffect } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import CastCardComponent from "@/components/moviedetail/CastCard.vue";
 import TrailerComponent from "@/components/moviedetail/Trailer.vue";
@@ -204,7 +204,7 @@ export default {
           }
         });
 
-    watchEffect(() => {
+    onMounted(() => {
       if (route.params.id) {
         getMovie();
       }
@@ -302,25 +302,20 @@ export default {
   &__rating {
     color: $white;
     background-color: $black;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-
-    &:hover {
-      color: $black;
-      background-color: $white;
-      border: 2px solid $black;
-    }
   }
 
   &__addfavorite {
     border: none;
     background-color: transparent;
+    cursor: pointer;
   }
 
   &__play {
@@ -334,22 +329,16 @@ export default {
     padding: 3px;
     background-color: $white;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   &__tagline {
     margin-top: 15px;
   }
 
-  &__cast-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   &__similarmovies {
     display: grid;
-    grid-gap: 20px;
+    grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     @include mq(md, max) {
