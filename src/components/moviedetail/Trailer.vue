@@ -36,7 +36,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 50px;
 
   &__inner {
     width: 100%;
@@ -73,7 +74,7 @@ export default {
 
   &__video {
     width: 100%;
-    height: 700px;
+    height: 600px;
     @include mq(xl, max) {
       height: 500px;
     }
